@@ -1,0 +1,7 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql://47.116.216.209:3306/xyc_mall
+    username: root
+    password: xycmall20240204
