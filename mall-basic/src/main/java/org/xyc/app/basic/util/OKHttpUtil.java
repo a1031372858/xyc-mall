@@ -1,32 +1,44 @@
 package org.xyc.app.basic.util;
 
-import lombok.RequiredArgsConstructor;
 import okhttp3.*;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
+ * HTTP请求工具包
  * @author xuyachang
  * @date 2024/2/26
  */
-@RequiredArgsConstructor
-@Component
 public class OKHttpUtil {
 
-    private final OkHttpClient client;
+    /**
+     * 饿汉式单例，保证内部使用时已经被初始化
+     */
+    private static final OkHttpClient client = new OkHttpClient().newBuilder()
+            .retryOnConnectionFailure(false)
+            .connectionPool(new ConnectionPool(200, 5, TimeUnit.MINUTES))
+            .connectTimeout(30,TimeUnit.SECONDS)
+            .readTimeout(30,TimeUnit.SECONDS)
+            .writeTimeout(30,TimeUnit.SECONDS)
+            .build();
 
-    public String get(String url,Map<String,String> param){
-        //构建url
-//        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
-//                .scheme("http")
-//                .host("localhost")
-//                .addPathSegment("api/user/read/getByPhone")
-//                .port(8082);
+    private OKHttpUtil(){}
 
+    public static OkHttpClient getClient(){
+        return client;
+    }
+
+    /**
+     * get请求
+     * @param url
+     * @param param
+     * @return
+     */
+    public static String get(String url,Map<String,String> param){
         HttpUrl builderUrl = HttpUrl.parse(url);
         if(Objects.isNull(builderUrl)){
             throw new NullPointerException("url不合法");
@@ -46,9 +58,14 @@ public class OKHttpUtil {
         return executeRequest(request);
     }
 
-
-    public String postJson(String url,String json){
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),json);
+    /**
+     * post发送json
+     * @param url
+     * @param json
+     * @return
+     */
+    public static String postJson(String url,String json){
+        RequestBody body = RequestBody.create(json,MediaType.parse("application/json; charset=utf-8"));
 
         Request request = new Request.Builder()
                 .post(body)
@@ -58,7 +75,13 @@ public class OKHttpUtil {
         return executeRequest(request);
     }
 
-    public String postFrom(String url,Map<String,String> param){
+    /**
+     * post发送form表单
+     * @param url
+     * @param param
+     * @return
+     */
+    public static String postFrom(String url,Map<String,String> param){
         FormBody.Builder formBuilder = new FormBody.Builder();
         param.forEach(formBuilder::add);
         RequestBody formBody = formBuilder.build();
@@ -71,17 +94,17 @@ public class OKHttpUtil {
         return executeRequest(request);
     }
 
-    public String postFile(String url,String fileUrl){
+    public static String postFile(String url,String fileUrl){
         File file = new File(fileUrl);
         Request request = new Request.Builder()
                 .url(url)
-                .post(RequestBody.create(MediaType.parse("text/x-markdown; charset=utf-8"), file))
+                .post(RequestBody.create(file,MediaType.parse("text/x-markdown; charset=utf-8")))
                 .build();
 
         return executeRequest(request);
     }
 
-    private String executeRequest(Request request){
+    private static String executeRequest(Request request){
         //执行请求
         try (Response response = client.newCall(request).execute()){
             //返回响应
@@ -92,7 +115,7 @@ public class OKHttpUtil {
         }
     }
 
-    private String handleResponse(Response response) throws IOException {
+    private static String handleResponse(Response response) throws IOException {
         if(response.isSuccessful() && 200 == response.code()){
             return response.body().string();
         }else{

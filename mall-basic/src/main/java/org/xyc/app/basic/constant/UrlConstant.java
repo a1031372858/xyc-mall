@@ -6,6 +6,7 @@ package org.xyc.app.basic.constant;
  */
 public interface UrlConstant {
 
+    String USER_URL = "http://localhost:8082";
     String USER_HOST = "localhost";
 
     String ORDER_HOST = "localhost";
