@@ -8,7 +8,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mall-runtime</artifactId>
-    <packaging>jar</packaging>
 
     <name>mall-runtime</name>
     <url>http://maven.apache.org</url>
@@ -27,7 +26,6 @@
         <dependency>
             <groupId>org.xyc.app</groupId>
             <artifactId>mall-login</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

@@ -2,6 +2,7 @@ package org.xyc.app.login.service;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.xyc.app.basic.constant.UrlConstant;
+import org.xyc.app.basic.model.SecurityUser;
 import org.xyc.app.basic.util.OKHttpUtil;
 import org.xyc.domain.base.model.Response;
 import org.xyc.domain.user.model.to.UserTO;
@@ -20,6 +22,7 @@ import java.util.Objects;
  * @author xuyachang
  * @date 2024/3/20
  */
+@RequiredArgsConstructor
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -30,7 +33,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(Objects.nonNull(userTO)){
             password = userTO.getPassword();
         }
-        return new User(username,password, AuthorityUtils.createAuthorityList());
+        SecurityUser securityUser = new SecurityUser(username, password, AuthorityUtils.createAuthorityList());
+        securityUser.setUserTO(userTO);
+        return securityUser;
     }
 
     private UserTO getUserInfo(String username){

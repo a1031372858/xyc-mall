@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mall-login</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>mall-login</name>
     <url>http://maven.apache.org</url>
@@ -21,12 +21,11 @@
         <dependency>
             <groupId>org.xyc.app</groupId>
             <artifactId>mall-basic</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.xyc</groupId>
             <artifactId>xyc-domain-user-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${xyc.domain.user.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
