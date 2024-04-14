@@ -1,11 +1,9 @@
 package org.xyc.app.login.service;
 
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -42,7 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         String url = UrlConstant.USER_URL + UrlConstant.FIND_USER_BY_PHONE;
         UserTO userTO = new UserTO();
         userTO.setPhone(username);
-        String responseResult = OKHttpUtil.postJson(url, JSON.toJSONString(userTO));
+        String responseResult = OKHttpUtil.postJson(url, userTO);
         Response response = JSONObject.parseObject(responseResult, Response.class);
         if(response.getData() instanceof JSONObject){
             JSONObject jsonObject = (JSONObject) response.getData();

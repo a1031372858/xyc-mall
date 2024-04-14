@@ -8,7 +8,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mall-basic</artifactId>
-    <packaging>jar</packaging>
 
     <name>mall-basic</name>
     <url>http://maven.apache.org</url>
@@ -33,7 +32,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
         <dependency>
@@ -80,7 +78,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -88,6 +85,10 @@
         <dependency>
             <groupId>org.xyc</groupId>
             <artifactId>xyc-domain-user-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.xyc</groupId>
+            <artifactId>xyc-domain-order-api</artifactId>
         </dependency>
     </dependencies>
 </project>

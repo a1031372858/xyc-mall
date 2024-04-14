@@ -16,6 +16,7 @@
     <module>mall-login</module>
     <module>mall-basic</module>
     <module>mall-sdk</module>
+    <module>mall-trade</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -48,6 +49,11 @@
       </dependency>
       <dependency>
         <groupId>org.xyc.app</groupId>
+        <artifactId>mall-trade</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xyc.app</groupId>
         <artifactId>mall-runtime</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -55,6 +61,16 @@
         <groupId>org.xyc.app</groupId>
         <artifactId>mall-sdk</artifactId>
         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xyc</groupId>
+        <artifactId>xyc-domain-user-api</artifactId>
+        <version>${xyc.domain.user.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xyc</groupId>
+        <artifactId>xyc-domain-order-api</artifactId>
+        <version>${xyc.domain.order.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

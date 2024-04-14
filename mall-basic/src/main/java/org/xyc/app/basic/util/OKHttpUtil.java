@@ -1,5 +1,6 @@
 package org.xyc.app.basic.util;
 
+import com.alibaba.fastjson2.JSON;
 import okhttp3.*;
 
 import java.io.File;
@@ -56,6 +57,16 @@ public class OKHttpUtil {
 
         //执行请求
         return executeRequest(request);
+    }
+
+    /**
+     * post发送json
+     * @param url
+     * @param param
+     * @return
+     */
+    public static String postJson(String url,Object param){
+        return postJson(url,JSON.toJSONString(param));
     }
 
     /**
