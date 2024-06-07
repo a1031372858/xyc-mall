@@ -47,4 +47,9 @@ public class TradeService {
         Boolean result = Assert.getResult(orderWriteFacade.updateOrderStatus(orderTO));
         return result.toString();
     }
+
+    public OrderTO findByCode(OrderTO orderTO){
+        return Assert.getResult(orderReadFacade.findOrder(orderTO));
+    }
+
 }
