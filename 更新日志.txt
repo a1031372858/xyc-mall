@@ -1,2 +1,8 @@
 2024/5/13
 引入spring-cloud-nacos依赖，注册到Nacos注册中心
+
+2024/6/11
+将配置移动到Nacos Config配置中心
+优点:
+1.不会在application.yml中暴露账户密码等关键信息
+2.配置项实时更新，不用提交代码
