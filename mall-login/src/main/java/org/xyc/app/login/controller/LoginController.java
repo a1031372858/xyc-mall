@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import org.xyc.app.basic.model.SecurityUser;
+import org.xyc.app.basic.util.UserInfoHolder;
 import org.xyc.app.login.service.LoginService;
 import org.xyc.domain.user.model.to.UserTO;
 
@@ -48,9 +49,7 @@ public class LoginController {
      */
     @GetMapping("hello")
     public String hello(){
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication authentication = context.getAuthentication();
-        SecurityUser user = (SecurityUser)authentication.getPrincipal();
-        return "Hello " + user.getUserTO().getName();
+       UserTO userTO = UserInfoHolder.getUserTO();
+        return "Hello " + userTO.getName();
     }
 }

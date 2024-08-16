@@ -30,9 +30,9 @@ public class OrderController {
         return tradeService.orderPaid(orderTO);
     }
 
-    @GetMapping("none")
-    public String orderNone(OrderTO orderTO){
-        return tradeService.orderNone(orderTO);
+    @GetMapping("done")
+    public String orderDone(OrderTO orderTO){
+        return tradeService.orderDone(orderTO);
     }
 
     @GetMapping("findByCode")

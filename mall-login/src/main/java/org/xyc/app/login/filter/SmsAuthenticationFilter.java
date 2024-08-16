@@ -60,7 +60,7 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
         if(user == null){
             throw new BusinessException("用户不存在");
         }
-        loginService.removeUserAuthCodeTO(username);
+        loginService.removeUserAuthCodeTO(username); 
         return new SmsAuthenticationToken(user,null,user.getAuthorities());
     }
 

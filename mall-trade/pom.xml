@@ -66,5 +66,9 @@
             <groupId>org.xyc</groupId>
             <artifactId>xyc-domain-order-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        </dependency>
     </dependencies>
 </project>

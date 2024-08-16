@@ -6,12 +6,14 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.xyc.app.basic.model.SecurityUser;
+import org.xyc.app.basic.util.UserInfoHolder;
 import org.xyc.domain.base.util.Assert;
 import org.xyc.domain.order.common.constant.OrderStatusConstant;
 import org.xyc.domain.order.facade.OrderReadFacade;
 import org.xyc.domain.order.facade.OrderWriteFacade;
 import org.xyc.domain.order.model.request.OrderCreateRequest;
 import org.xyc.domain.order.model.to.OrderTO;
+import org.xyc.domain.user.model.to.UserTO;
 
 /**
  * @author xuyachang
@@ -26,10 +28,10 @@ public class TradeService {
     private final OrderWriteFacade orderWriteFacade;
 
     public String createOrder(OrderCreateRequest orderCreateRequest) {
-        SecurityContext context = SecurityContextHolder.getContext();
-        SecurityUser user = (SecurityUser)context.getAuthentication().getPrincipal();
-        orderCreateRequest.setBuyerMobile(user.getUserTO().getPhone());
-        orderCreateRequest.setBuyerName(user.getUserTO().getName());
+        UserTO userTO = UserInfoHolder.getUserTO();
+        orderCreateRequest.setBuyerId(userTO.getId());
+        orderCreateRequest.setBuyerMobile(userTO.getPhone());
+        orderCreateRequest.setBuyerName(userTO.getName());
         orderCreateRequest.setShopId(orderCreateRequest.getShopId());
         OrderTO newOrder = Assert.getResult(orderWriteFacade.createOrder(orderCreateRequest));
         OrderTO order = Assert.getResult(orderReadFacade.findOrder(newOrder));
@@ -42,7 +44,7 @@ public class TradeService {
         return result.toString();
     }
 
-    public String orderNone(OrderTO orderTO) {
+    public String orderDone(OrderTO orderTO) {
         orderTO.setOrderStatus(OrderStatusConstant.DONE);
         Boolean result = Assert.getResult(orderWriteFacade.updateOrderStatus(orderTO));
         return result.toString();
