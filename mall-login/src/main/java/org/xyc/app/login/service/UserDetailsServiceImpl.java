@@ -38,6 +38,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserTO getUserInfo(String username){
         UserTO userTO = new UserTO();
         userTO.setPhone(username);
-        return Assert.getResult(userReadFacade.findUserByPhone(userTO));
+        return Assert.getResult(userReadFacade.findUserAndPermissionByPhone(userTO));
     }
 }
