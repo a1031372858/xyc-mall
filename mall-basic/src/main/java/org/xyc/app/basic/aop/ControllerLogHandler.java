@@ -43,6 +43,10 @@ public class ControllerLogHandler {
         for (int i = 0; i < parameterNames.length; i++) {
             String name = parameterNames[i];
             Object arg = args[i];
+            //HttpServletRequest无法序列化，会导致报错
+            if(arg instanceof HttpServletRequest){
+                continue;
+            }
             argMap.put(name,arg);
         }
         log.info("----url={},args={}",request.getRequestURL(), JSON.toJSONString(argMap));

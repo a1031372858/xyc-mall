@@ -31,5 +31,9 @@
             <groupId>org.xyc.app</groupId>
             <artifactId>mall-trade</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.xyc.app</groupId>
+            <artifactId>mall-open</artifactId>
+        </dependency>
     </dependencies>
 </project>

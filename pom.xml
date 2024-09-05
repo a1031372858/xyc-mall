@@ -17,6 +17,7 @@
     <module>mall-basic</module>
     <module>mall-sdk</module>
     <module>mall-trade</module>
+    <module>mall-open</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -60,6 +61,11 @@
       <dependency>
         <groupId>org.xyc.app</groupId>
         <artifactId>mall-sdk</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xyc.app</groupId>
+        <artifactId>mall-open</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

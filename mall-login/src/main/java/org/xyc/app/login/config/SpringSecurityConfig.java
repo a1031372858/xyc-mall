@@ -30,7 +30,7 @@ public class SpringSecurityConfig {
         http.addFilterBefore(smsAuthenticationFilter(http), UsernamePasswordAuthenticationFilter.class);
 
         return http.authorizeRequests()
-                .antMatchers("/mall/login/makeAuthCode")
+                .antMatchers("/mall/login/makeAuthCode","/api/open/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
